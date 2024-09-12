@@ -1,6 +1,8 @@
 package com.spring.my_select_shop.domain;
 
 import com.spring.my_select_shop.Timestamped;
+import com.spring.my_select_shop.repository.ProductMypriceRequestDto;
+import com.spring.my_select_shop.repository.ProductRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,4 +32,18 @@ public class Product extends Timestamped {
 
     @Column(nullable = false)
     private int myprice;
+
+    // 관심 상품 생성 시 이용
+    public Product(ProductRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.image = requestDto.getImage();
+        this.link = requestDto.getLink();
+        this.lprice = requestDto.getLprice();
+        this.myprice = 0;
+    }
+
+    // 관심 가격 변경 시 이용
+    public void update(ProductMypriceRequestDto requestDto) {
+        this.myprice = requestDto.getMyprice();
+    }
 }
