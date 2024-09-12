@@ -1,6 +1,7 @@
 package com.spring.my_select_shop.domain;
 
 import com.spring.my_select_shop.Timestamped;
+import com.spring.my_select_shop.repository.ItemDto;
 import com.spring.my_select_shop.repository.ProductMypriceRequestDto;
 import com.spring.my_select_shop.repository.ProductRequestDto;
 import jakarta.persistence.*;
@@ -45,5 +46,10 @@ public class Product extends Timestamped {
     // 관심 가격 변경 시 이용
     public void update(ProductMypriceRequestDto requestDto) {
         this.myprice = requestDto.getMyprice();
+    }
+
+    // 최저가 변경 시 이용
+    public void updateByItemDto(ItemDto itemDto) {
+        this.lprice = itemDto.getLprice();
     }
 }
