@@ -21,7 +21,7 @@ public class NaverShopSearch {
         String body = "";
 
         HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
-        ResponseEntity<String> responseEntity = rest.exchange("https://openapi.naver.com/v1/search/shop.json?query=iphone", HttpMethod.GET, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = rest.exchange("https://openapi.naver.com/v1/search/shop.json?query=" + query, HttpMethod.GET, requestEntity, String.class);
         HttpStatus httpStatus = (HttpStatus) responseEntity.getStatusCode();
         int status = httpStatus.value();
         String response = responseEntity.getBody();
@@ -45,12 +45,5 @@ public class NaverShopSearch {
             ret.add(itemDto);
         }
         return ret;
-    }
-
-    public static void main(String[] args) {
-        NaverShopSearch naverShopSearch = new NaverShopSearch();
-        String ret = naverShopSearch.search("아이맥");
-        naverShopSearch.fromJSONtoItems(ret);
-
     }
 }
